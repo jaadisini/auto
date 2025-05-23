@@ -27,13 +27,10 @@ async def get_ai_response(text):
 # Perintah /autoreply on|off
 @app.on_message(filters.command("autoreply", prefixes="/") & filters.group)
 async def toggle_autoreply(client, message: Message):
-    chat_id = message.chat.id
-    user_id = message.from_user.id
+    
 
     # Hanya admin boleh mengubah
-    member = await client.get_chat_member(chat_id, user_id)
-    if member.status not in ("administrator", "creator"):
-        return await message.reply("Hanya admin yang bisa mengatur fitur ini.")
+    
 
     args = message.text.lower().split()
     if len(args) != 2 or args[1] not in ("on", "off"):
